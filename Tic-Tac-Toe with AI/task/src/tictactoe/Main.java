@@ -15,7 +15,7 @@ public class Main {
         game.fillCells("         ");
         game.printGame();
 
-        while(game.getGameState().equals("Game not finished")) {
+        while(game.getGameState() == GameState.UNFINISHED) {
 
             if (game.isXTurn()) {
                 while (!x.isTurnTaken()) {
@@ -29,7 +29,19 @@ public class Main {
             game.printGame();
             game.updateGameState();
         }
-        System.out.println(game.getGameState());
+        switch (game.getGameState()) {
+            case DRAW:
+                System.out.println("Draw");
+                break;
+            case X_WINS:
+                System.out.println("X Wins");
+                break;
+            case O_WINS:
+                System.out.println("O Wins");
+                break;
+            default:
+                System.out.println("Unable to establish game state");
+        }
     }
 
     public static int[] getCoOrdinates() {

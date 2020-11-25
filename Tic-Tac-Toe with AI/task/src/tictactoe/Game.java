@@ -5,14 +5,14 @@ import java.util.Arrays;
 public class Game {
     private char[][] gameGrid;
     private int cells;
-    private String gameState;
+    private GameState gameState;
     private final char empty = ' ';
     private final char cross = 'X';
     private final char nought = 'O';
 
     Game (int cells) {
         this.cells = cells;
-        this.gameState = "Game not finished";
+        this.gameState = GameState.UNFINISHED;
         this.gameGrid = new char[this.cells][this.cells];
         for (int i = 0; i < this.cells; i++) {
             Arrays.fill(this.gameGrid[i], this.empty);
@@ -33,14 +33,6 @@ public class Game {
 
     public char getEmpty() {
         return empty;
-    }
-
-    public char getCross() {
-        return cross;
-    }
-
-    public char getNought() {
-        return nought;
     }
 
     public void fillCells(String cellValuesAsString) {
@@ -77,7 +69,7 @@ public class Game {
         System.out.println();
     }
 
-    public String getGameState() {
+    public GameState getGameState() {
         return gameState;
     }
 
@@ -87,41 +79,41 @@ public class Game {
             // Horizontal and Vertical
             for (int i = 0; i < this.cells; i++) {
                 if (this.gameGrid[i][0] == this.nought && this.gameGrid[i][1] == this.nought && this.gameGrid[i][2] == this.nought) {
-                    this.gameState = "O wins";
+                    this.gameState = GameState.O_WINS;
                     conditionFound = true;
                 } else if (this.gameGrid[0][i] == this.nought && this.gameGrid[1][i] == this.nought && this.gameGrid[2][i] == this.nought) {
-                    this.gameState = "O wins";
+                    this.gameState = GameState.O_WINS;
                     conditionFound = true;
                 }
             }
             for (int i = 0; i < this.cells; i++) {
                 if (this.gameGrid[i][0] == this.cross && this.gameGrid[i][1] == this.cross && this.gameGrid[i][2] == this.cross) {
-                    this.gameState = "X wins";
+                    this.gameState = GameState.X_WINS;
                     conditionFound = true;
                 } else if (this.gameGrid[0][i] == this.cross && this.gameGrid[1][i] == this.cross && this.gameGrid[2][i] == this.cross) {
-                    this.gameState = "X wins";
+                    this.gameState = GameState.X_WINS;
                     conditionFound = true;
                 }
             }
             // Diagonals
             if (this.gameGrid[0][0] == this.nought && this.gameGrid[1][1] == this.nought && this.gameGrid[2][2] == this.nought) {
-                this.gameState = "O wins";
+                this.gameState = GameState.O_WINS;
                 conditionFound = true;
             } else if (this.gameGrid[0][2] == this.nought && this.gameGrid[1][1] == this.nought && this.gameGrid[2][0] == this.nought) {
-                this.gameState = "O wins";
+                this.gameState = GameState.O_WINS;
                 conditionFound = true;
             }
             if (this.gameGrid[0][0] == this.cross && this.gameGrid[1][1] == this.cross && this.gameGrid[2][2] == this.cross) {
-                this.gameState = "X wins";
+                this.gameState = GameState.X_WINS;
                 conditionFound = true;
             } else if (this.gameGrid[0][2] == this.cross && this.gameGrid[1][1] == this.cross && this.gameGrid[2][0] == this.cross) {
-                this.gameState = "X wins";
+                this.gameState = GameState.X_WINS;
                 conditionFound = true;
             }
             // Not won
             conditionFound = true;
             if (!isSpace()) {
-                this.gameState = "Draw";
+                this.gameState = GameState.DRAW;
             }
         }
     }
