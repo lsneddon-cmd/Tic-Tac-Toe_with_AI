@@ -4,7 +4,7 @@ import java.util.Arrays;
 
 public class Game {
     private char[][] gameGrid;
-    private int cells;
+    private final int cells;
     private GameState gameState;
     private final char empty = ' ';
     private final char cross = 'X';
@@ -35,7 +35,7 @@ public class Game {
         return empty;
     }
 
-    public void printGame() {
+    public void printFormattedGameGrid() {
         System.out.print(" ");
         for (int i = 0; i < this.cells * 2 + 1; i++) {
             System.out.print("-");
@@ -61,6 +61,14 @@ public class Game {
     }
 
     public void updateGameState() {
+        // TODO refactor this function
+        // check for 3 in a row
+        // check for 3 in a col
+        // check for 3 in TL BR diagonal
+        // check for 3 in BL TR diagonal
+        // if any of above hold true, value within denotes winner
+        // else if any field contains space, state is UNFINISHED
+        // else state is DRAW
         boolean conditionFound = false;
         while (!conditionFound) {
             // Horizontal and Vertical

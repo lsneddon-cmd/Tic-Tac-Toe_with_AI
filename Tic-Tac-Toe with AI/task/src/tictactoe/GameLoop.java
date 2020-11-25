@@ -29,7 +29,7 @@ public class GameLoop {
                 xTurn = playerTwo.takeTurn(new int[] {0, 0}, game);
                 oTurn = !xTurn;
             }
-            game.printGame();
+            game.printFormattedGameGrid();
             game.updateGameState();
         }
         switch (game.getGameState()) {
@@ -44,6 +44,7 @@ public class GameLoop {
                 break;
             default:
                 System.out.println("Unable to establish game state");
+                System.exit(1);
         }
     }
 
