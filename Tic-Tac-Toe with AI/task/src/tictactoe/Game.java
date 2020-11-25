@@ -35,19 +35,6 @@ public class Game {
         return empty;
     }
 
-    public void fillCells(String cellValuesAsString) {
-        char[] cellValues = cellValuesAsString.toCharArray();
-        for (int i = 0; i < this.cells; i++) {
-            for (int j = 0; j < this.cells; j++) {
-                if (cellValues[3 * i + j] == '_') {
-                    gameGrid[i][j] = empty;
-                } else {
-                    gameGrid[i][j] = cellValues[3 * i + j];
-                }
-            }
-        }
-    }
-
     public void printGame() {
         System.out.print(" ");
         for (int i = 0; i < this.cells * 2 + 1; i++) {
@@ -81,34 +68,42 @@ public class Game {
                 if (this.gameGrid[i][0] == this.nought && this.gameGrid[i][1] == this.nought && this.gameGrid[i][2] == this.nought) {
                     this.gameState = GameState.O_WINS;
                     conditionFound = true;
+                    return;
                 } else if (this.gameGrid[0][i] == this.nought && this.gameGrid[1][i] == this.nought && this.gameGrid[2][i] == this.nought) {
                     this.gameState = GameState.O_WINS;
                     conditionFound = true;
+                    return;
                 }
             }
             for (int i = 0; i < this.cells; i++) {
                 if (this.gameGrid[i][0] == this.cross && this.gameGrid[i][1] == this.cross && this.gameGrid[i][2] == this.cross) {
                     this.gameState = GameState.X_WINS;
                     conditionFound = true;
+                    return;
                 } else if (this.gameGrid[0][i] == this.cross && this.gameGrid[1][i] == this.cross && this.gameGrid[2][i] == this.cross) {
                     this.gameState = GameState.X_WINS;
                     conditionFound = true;
+                    return;
                 }
             }
             // Diagonals
             if (this.gameGrid[0][0] == this.nought && this.gameGrid[1][1] == this.nought && this.gameGrid[2][2] == this.nought) {
                 this.gameState = GameState.O_WINS;
                 conditionFound = true;
+                return;
             } else if (this.gameGrid[0][2] == this.nought && this.gameGrid[1][1] == this.nought && this.gameGrid[2][0] == this.nought) {
                 this.gameState = GameState.O_WINS;
                 conditionFound = true;
+                return;
             }
             if (this.gameGrid[0][0] == this.cross && this.gameGrid[1][1] == this.cross && this.gameGrid[2][2] == this.cross) {
                 this.gameState = GameState.X_WINS;
                 conditionFound = true;
+                return;
             } else if (this.gameGrid[0][2] == this.cross && this.gameGrid[1][1] == this.cross && this.gameGrid[2][0] == this.cross) {
                 this.gameState = GameState.X_WINS;
                 conditionFound = true;
+                return;
             }
             // Not won
             conditionFound = true;
@@ -130,20 +125,4 @@ public class Game {
         }
         return spaceLeft;
     }
-
-    public boolean isXTurn() {
-        int xCount = 0;
-        int oCount = 0;
-        for (int i = 0; i < this.cells; i++) {
-            for (int j = 0; j < this.cells; j++) {
-                if (gameGrid[i][j] == nought) {
-                    oCount++;
-                } else if (gameGrid[i][j] == cross) {
-                    xCount++;
-                }
-            }
-        }
-        return xCount <= oCount;
-    }
-
 }
