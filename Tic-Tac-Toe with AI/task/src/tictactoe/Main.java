@@ -6,11 +6,13 @@ public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         String input;
-        while (true) {
+        boolean flag = false;
+        while (!flag) {
             try {
                 System.out.print("Input command: ");
                 input = scanner.nextLine();
                 InputHandler inputs = new InputHandler(input);
+                flag = true;
                 GameLoop loop = new GameLoop(new Game(3),
                         inputs.getPlayerOne(),
                         inputs.getPlayerTwo());
@@ -19,5 +21,8 @@ public class Main {
                 System.out.println(e.getMessage());
             }
         }
+
+
+
     }
 }
